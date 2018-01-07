@@ -1,7 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <AssemblyName>KodeFisk.Simplicity.Rx</AssemblyName>
+    <RootNamespace>KodeFisk.Simplicity.Rx</RootNamespace>
+    <Authors>Jon Stødle</Authors>
+    <Company>KodeFisk</Company>
+    <Description>A library of extension methods to make Rx.NET code easier to write and read.</Description>
+    <Copyright>KodeFisk 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/KodeFisk/Simplicity.Rx/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/KodeFisk/Simplicity.Rx</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
