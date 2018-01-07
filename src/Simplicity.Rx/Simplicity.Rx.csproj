@@ -10,6 +10,7 @@
     <Copyright>KodeFisk 2018</Copyright>
     <PackageLicenseUrl>https://github.com/KodeFisk/Simplicity.Rx/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/KodeFisk/Simplicity.Rx</PackageProjectUrl>
+    <PackageTags>Rx; Rx.NET; Reactive Extensions</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
