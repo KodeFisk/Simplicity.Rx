@@ -57,5 +57,25 @@ namespace System.Reactive
         /// <param name="eventName">Name of the event.</param>
         /// <typeparam name="TEventArgs">The type of event arguments emitted by the event.</typeparam>
         public static IObservable<EventPattern<TEventArgs>> GetEvents<TEventArgs>(this object source, string eventName) => Observable.FromEventPattern<TEventArgs>(source, eventName);
+
+        /// <summary>
+        /// Writes every signal of the source observable to the debug console (without modifying the source observable)
+        /// </summary>
+        /// <returns>The source observable.</returns>
+        /// <param name="source">The source observable.</param>
+        /// <param name="text">A text to prefix the console message with.</param>
+        /// <typeparam name="T">The type of the source observable.</typeparam>
+		public static IObservable<T> Debug<T>(this IObservable<T> source, string text = "") => source.Do(x => System.Diagnostics.Debug.WriteLine($"{text}{(text.HasValue() ? " " : "")}OnNext: {x}"), ex => System.Diagnostics.Debug.WriteLine($"{text}{(text.HasValue() ? " " : "")}OnError: {ex}"), () => System.Diagnostics.Debug.WriteLine($"{text}{(text.HasValue() ? " " : "")}OnCompleted"));
+
+        /// <summary>
+        /// Writes every signal of the source observable to the debug console by applying the selector (without modidying the source observable)
+        /// </summary>
+        /// <returns>The source observable.</returns>
+        /// <param name="source">The source observable.</param>
+        /// <param name="selector">A function to select the desired property of the signal.</param>
+        /// <param name="text">A text to prefix the console message with.</param>
+        /// <typeparam name="T">The type of the source observable.</typeparam>
+        /// <typeparam name="TResult">The type of the result of the selector, which is written to the console.</typeparam>
+        public static IObservable<T> Debug<T, TResult>(this IObservable<T> source, Func<T, TResult> selector, string text = "") => source.Do(x => System.Diagnostics.Debug.WriteLine($"{text}{(text.HasValue() ? " " : "")}OnNext: {selector(x)}"), ex => System.Diagnostics.Debug.WriteLine($"{text}{(text.HasValue() ? " " : "")}OnError: {ex}"), () => System.Diagnostics.Debug.WriteLine($"{text}{(text.HasValue() ? " " : "")}OnCompleted"));
     }
 }
