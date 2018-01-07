@@ -23,5 +23,13 @@ namespace System.Reactive
         /// <param name="returnValue">The value to be sent in the returning observable.</param>
         /// <typeparam name="T">The type of the signal inside the observable.</typeparam>
         public static IObservable<T> CatchAndReturn<T>(this IObservable<T> source, T returnValue) => source.Catch(Observable.Return(returnValue));
+
+        /// <summary>
+        /// Syntactic sugar for filtering an <c>IObservable&lt;bool&gt;</c> to only contain <c>true</c> or <c>false</c> signals.
+        /// </summary>
+        /// <returns>An <c>IObservable&lt;bool&gt;</c> that only contains the specified boolean value.</returns>
+        /// <param name="source">The observable to filter.</param>
+        /// <param name="condition">The boolean value to check against.</param>
+        public static IObservable<bool> Where(this IObservable<bool> source, bool condition) => source.Where(value => value == condition);
     }
 }
