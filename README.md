@@ -1,3 +1,3 @@
 # Simplicity.Rx
 
-A library with helpful extensions methods for Rx.NET
+A library of extension methods to make Rx.NET code easier to write and read.
