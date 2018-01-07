@@ -31,5 +31,13 @@ namespace System.Reactive
         /// <param name="source">The observable to filter.</param>
         /// <param name="condition">The boolean value to check against.</param>
         public static IObservable<bool> Where(this IObservable<bool> source, bool condition) => source.Where(value => value == condition);
+
+        /// <summary>
+        /// Syntactic sugar for filtering an <c>IObservable&lt;T&gt;</c> to only contain non-null singals.
+        /// </summary>
+        /// <returns>An <c>IObservable&lt;T&gt;</c> that only contains non-null signals.</returns>
+        /// <param name="source">The observable to filter.</param>
+        /// <typeparam name="T">The the of the signal inside the observable.</typeparam>
+        public static IObservable<T> WhereNotNull<T>(this IObservable<T> source) => source.Where(value => value != null);
     }
 }
