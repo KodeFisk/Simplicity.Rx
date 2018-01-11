@@ -11,6 +11,8 @@
     <PackageLicenseUrl>https://github.com/KodeFisk/Simplicity.Rx/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/KodeFisk/Simplicity.Rx</PackageProjectUrl>
     <PackageTags>Rx; Rx.NET; Reactive Extensions</PackageTags>
+    <Version>1.1.0</Version>
+    <PackageReleaseNotes>Dependency on Rx.NET has been changed to 3.1.1 to make the library easier to consume until Rx.NET v4 is ready.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
