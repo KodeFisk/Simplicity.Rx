@@ -41,24 +41,6 @@ namespace System.Reactive.Linq
         public static IObservable<T> WhereNotNull<T>(this IObservable<T> source) => source.Where(value => value != null);
 
         /// <summary>
-        /// Creates an observable that signals every time the event with the given name is fired
-        /// </summary>
-        /// <returns>An observable that signals every time the event is fired.</returns>
-        /// <param name="source">The object containing the event.</param>
-        /// <param name="eventName">Name of the event.</param>
-        /// <typeparam name="T">The type of the class contains the event.</typeparam>
-        public static IObservable<EventPattern<object>> GetEvents<T>(this T source, string eventName) => Observable.FromEventPattern(source, eventName);
-
-        /// <summary>
-        /// Creates an observable that signals every time the event with the given name is fired
-        /// </summary>
-        /// <returns>An observable that signals ever time the event is fired.</returns>
-        /// <param name="source">The object containing the event.</param>
-        /// <param name="eventName">Name of the event.</param>
-        /// <typeparam name="TEventArgs">The type of event arguments emitted by the event.</typeparam>
-        public static IObservable<EventPattern<TEventArgs>> GetEvents<TEventArgs>(this object source, string eventName) => Observable.FromEventPattern<TEventArgs>(source, eventName);
-
-        /// <summary>
         /// Writes every signal of the source observable to the debug console (without modifying the source observable)
         /// </summary>
         /// <returns>The source observable.</returns>
