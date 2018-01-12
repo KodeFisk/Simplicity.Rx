@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Text;
 
-namespace System.Reactive
+namespace System.Reactive.Linq
 {
     public static class SystemReactiveMixins
     {
