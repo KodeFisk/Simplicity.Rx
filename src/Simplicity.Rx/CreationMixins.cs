@@ -8,6 +8,21 @@ namespace System.Reactive.Linq
     public static class CreationMixins
     {
         /// <summary>
+        /// Creates an observable that starts the <c>Task</c> when subscribed to
+        /// </summary>
+        /// <param name="source">The <c>Task</c> to convert.</param>
+        /// <returns></returns>
+        public static IObservable<Unit> ToColdObservable(this Task source) => Observable.FromAsync(() => source);
+
+        /// <summary>
+        /// Creates an observable that starts the <c>Task</c> when subscribed to
+        /// </summary>
+        /// <typeparam name="T">The type of the next signals.</typeparam>
+        /// <param name="source">The <c>Task</c> to convert.</param>
+        /// <returns></returns>
+        public static IObservable<T> ToColdObservable<T>(this Task<T> source) => Observable.FromAsync(() => source);
+
+        /// <summary>
         /// Creates an observable that signals every time the event with the given name is fired
         /// </summary>
         /// <returns>An observable that signals every time the event is fired.</returns>
