@@ -16,6 +16,26 @@ namespace System.Reactive.Linq
         public static IObservable<Unit> ToSignal<T>(this IObservable<T> source) => source.Select(_ => Unit.Default);
 
         /// <summary>
+        /// Project every item into an observable and subscribes only to the most recent one. Like <c>SelectMany</c> but uses <c>Switch</c> instead of <c>Merge</c>.
+        /// </summary>
+        /// <typeparam name="T">The type of the source observable.</typeparam>
+        /// <typeparam name="TResult">The type of the resulting observable.</typeparam>
+        /// <param name="source">The observable to project.</param>
+        /// <param name="selector">The selector to use when projecting each item.</param>
+        /// <returns>An <c>IObservable&lt;TResult&gt;</c></returns>
+        public static IObservable<TResult> SelectSwitch<T, TResult>(this IObservable<T> source, Func<T, IObservable<TResult>> selector) => source.Select(selector).Switch();
+
+        /// <summary>
+        /// Project every item and it's index into an observable and subscribes only to the most recent one. Like <c>SelectMany</c> but uses <c>Switch</c> instead of <c>Merge</c>.
+        /// </summary>
+        /// <typeparam name="T">The type of the source observable.</typeparam>
+        /// <typeparam name="TResult">The type of the resulting observable.</typeparam>
+        /// <param name="source">The observable to project.</param>
+        /// <param name="selector">The selector to use when projecting each item.</param>
+        /// <returns>An <c>IObservable&lt;TResult&gt;</c></returns>
+        public static IObservable<TResult> SelectSwitch<T, TResult>(this IObservable<T> source, Func<T, int, IObservable<TResult>> selector) => source.Select(selector).Switch();
+
+        /// <summary>
         /// Catches any error that might occur and return an observable with a single given value.
         /// </summary>
         /// <returns>An observable with a single given value.</returns>
