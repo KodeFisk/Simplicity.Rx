@@ -11,9 +11,8 @@
     <PackageLicenseUrl>https://github.com/KodeFisk/Simplicity.Rx/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/KodeFisk/Simplicity.Rx</PackageProjectUrl>
     <PackageTags>Rx; Rx.NET; Reactive Extensions</PackageTags>
-    <Version>1.2.0</Version>
-    <PackageReleaseNotes>Moved everything to System.Reactive.Linq namespace
-New mixins to create cold observables from Tasks</PackageReleaseNotes>
+    <Version>1.3.0</Version>
+    <PackageReleaseNotes>Added SelectSwitch</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
