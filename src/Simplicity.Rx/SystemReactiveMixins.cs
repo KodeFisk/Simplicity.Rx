@@ -53,6 +53,15 @@ namespace System.Reactive.Linq
         public static IObservable<bool> Where(this IObservable<bool> source, bool condition) => source.Where(value => value == condition);
 
         /// <summary>
+        /// Syntactic sugar for filtering an observable to only contain the specified constant.
+        /// </summary>
+        /// <param name="source">The observable to filter.</param>
+        /// <param name="condition">A constant to check the values of the observable against.</param>
+        /// <typeparam name="T">The type of the signals of the observable</typeparam>
+        /// <returns>An observable that only contains values equal to the specified constant.</returns>
+        public static IObservable<T> Where<T>(this IObservable<T> source, T condition) => source.Where(value => value.Equals(condition));
+
+        /// <summary>
         /// Syntactic sugar for filtering an <c>IObservable&lt;T&gt;</c> to only contain non-null singals.
         /// </summary>
         /// <returns>An <c>IObservable&lt;T&gt;</c> that only contains non-null signals.</returns>
