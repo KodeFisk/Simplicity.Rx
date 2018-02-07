@@ -12,11 +12,10 @@ namespace Tests
         [Fact]
         public void ToSignalShouldConvertNextSignalsToUnit()
         {
-            var result = new List<object>();
-
-            Observable.Range(0, 5)
+            var result = new[] {1, 2, 3, 4}.ToObservable()
                 .ToSignal()
-                .Subscribe(value => result.Add(value));
+                .ToList()
+                .Wait();
             
             Assert.True(result.All(value => value.GetType() == typeof(Unit)));
         }
@@ -35,12 +34,10 @@ namespace Tests
         [Fact]
         public void WhereWithBoolShouldFilterOutSignalsWithOppositeValue()
         {
-            IList<bool> result = null;
-
-            new[] {true, false, true, false, true, false}.ToObservable()
+            var result = new[] {true, false, true, false, true, false}.ToObservable()
                 .Where(true)
                 .ToList()
-                .Subscribe(value => result = value);
+                .Wait();
             
             Assert.True(result.All(value => value == true));
         }
@@ -48,18 +45,15 @@ namespace Tests
         [Fact]
         public void WhereWithGenericShouldFilterOutSignalsNotEqualToSpecifiedConstant()
         {
-            IList<string> stringResult = null;
-            IList<int> intResult = null;
-
-            new[] {"One", "Two", "Three", "Four"}.ToObservable()
+            var stringResult = new[] {"One", "Two", "Three", "Four"}.ToObservable()
                 .Where("One")
                 .ToList()
-                .Subscribe(value => stringResult = value);
+                .Wait();
 
-            new[] {1, 2, 3, 4}.ToObservable()
+            var intResult = new[] {1, 2, 3, 4}.ToObservable()
                 .Where(1)
                 .ToList()
-                .Subscribe(value => intResult = value);
+                .Wait();
             
             Assert.True(stringResult.All(value => value == "One"));
             Assert.True(intResult.All(value => value == 1));
@@ -68,12 +62,10 @@ namespace Tests
         [Fact]
         public void WhereNotNullShouldFilterOutValuesThatAreNull()
         {
-            IList<object> result = null;
-
-            new[] {new object(), null, new object(), null}.ToObservable()
+            var result = new[] {new object(), null, new object(), null}.ToObservable()
                 .WhereNotNull()
                 .ToList()
-                .Subscribe(value => result = value);
+                .Wait();
             
             Assert.True(result.All(value => value != null));
         }
