@@ -22,6 +22,17 @@ namespace Tests
         }
 
         [Fact]
+        public void CatchAndReturnShouldReturnASingleValueWhenErrorSignalIsSent()
+        {
+            var result = Observable.Return(-1)
+                .SelectMany(_ => Observable.Throw<int>(new Exception()))
+                .CatchAndReturn(0)
+                .Wait();
+            
+            Assert.True(result == 0);
+        }
+
+        [Fact]
         public void WhereWithBoolShouldFilterOutSignalsWithOppositeValue()
         {
             IList<bool> result = null;
