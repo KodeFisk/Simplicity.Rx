@@ -53,5 +53,18 @@ namespace Tests
             Assert.True(stringResult.All(value => value == "One"));
             Assert.True(intResult.All(value => value == 1));
         }
+
+        [Fact]
+        public void WhereNotNullShouldFilterOutValuesThatAreNull()
+        {
+            IList<object> result = null;
+
+            new[] {new object(), null, new object(), null}.ToObservable()
+                .WhereNotNull()
+                .ToList()
+                .Subscribe(value => result = value);
+            
+            Assert.True(result.All(value => value != null));
+        }
     }
 }
