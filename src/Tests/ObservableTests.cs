@@ -20,5 +20,18 @@ namespace Tests
             
             Assert.True(result.All(value => value.GetType() == typeof(Unit)));
         }
+
+        [Fact]
+        public void WhereWithBoolShouldFilterOutSignalsWithOppositeValue()
+        {
+            IList<bool> result = null;
+
+            new[] {true, false, true, false, true, false}.ToObservable()
+                .Where(true)
+                .ToList()
+                .Subscribe(value => result = value);
+            
+            Assert.True(result.All(value => value == true));
+        }
     }
 }
