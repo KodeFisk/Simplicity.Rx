@@ -33,5 +33,25 @@ namespace Tests
             
             Assert.True(result.All(value => value == true));
         }
+
+        [Fact]
+        public void WhereWithGenericShouldFilterOutSignalsNotEqualToSpecifiedConstant()
+        {
+            IList<string> stringResult = null;
+            IList<int> intResult = null;
+
+            new[] {"One", "Two", "Three", "Four"}.ToObservable()
+                .Where("One")
+                .ToList()
+                .Subscribe(value => stringResult = value);
+
+            new[] {1, 2, 3, 4}.ToObservable()
+                .Where(1)
+                .ToList()
+                .Subscribe(value => intResult = value);
+            
+            Assert.True(stringResult.All(value => value == "One"));
+            Assert.True(intResult.All(value => value == 1));
+        }
     }
 }
