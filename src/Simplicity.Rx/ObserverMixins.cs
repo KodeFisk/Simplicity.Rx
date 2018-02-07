@@ -1,6 +1,6 @@
 ﻿namespace System
 {
-    public static class IObserverMixins
+    public static class ObserverMixins
     {
         /// <summary>
         /// Invokes <c>OnNext</c> with the given value, and then invokes <c>OnCompleted</c>

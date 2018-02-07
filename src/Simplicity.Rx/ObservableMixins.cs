@@ -5,7 +5,7 @@ using System.Text;
 
 namespace System.Reactive.Linq
 {
-    public static class SystemReactiveMixins
+    public static class ObservableMixins
     {
         /// <summary>
         /// Converts an <c>IObservable&lt;T&gt;</c> to an <c>IObservable&lt;Unit&gt;</c>.
