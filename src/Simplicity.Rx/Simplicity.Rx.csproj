@@ -1,5 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <AssemblyName>KodeFisk.Simplicity.Rx</AssemblyName>
@@ -14,10 +13,8 @@
     <Version>1.4.0</Version>
     <PackageReleaseNotes>Added new Where overload which supports any kind of constant</PackageReleaseNotes>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="KodeFisk.Simplicity" Version="1.0.0" />
     <PackageReference Include="System.Reactive" Version="3.1.1" />
   </ItemGroup>
-
 </Project>
