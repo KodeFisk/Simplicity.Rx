@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace System.Reactive.Linq
 {
@@ -23,17 +24,17 @@ namespace System.Reactive.Linq
         /// <param name="This">The observable to project.</param>
         /// <param name="selector">The selector to use when projecting each item.</param>
         /// <returns>An <c>IObservable&lt;TResult&gt;</c></returns>
-        public static IObservable<TResult> SelectSwitch<T, TResult>(this IObservable<T> This, Func<T, IObservable<TResult>> selector) => This.Select(selector).Switch();
+        public static IObservable<TResult> SelectLatest<T, TResult>(this IObservable<T> This, Func<T, IObservable<TResult>> selector) => This.Select(selector).Switch();
 
         /// <summary>
-        /// Project every item and it's index into an observable and subscribes only to the most recent one. Like <c>SelectMany</c> but uses <c>Switch</c> instead of <c>Merge</c>.
+        /// Project every item in to a task, which is then converted to an observable, and subscribe only to the most recent one. Like <c>SelectMany</c> but uses <c>Switch</c> instead of <c>Merge</c>.
         /// </summary>
-        /// <typeparam name="T">The type of the source observable.</typeparam>
-        /// <typeparam name="TResult">The type of the resulting observable.</typeparam>
         /// <param name="This">The observable to project.</param>
         /// <param name="selector">The selector to use when projecting each item.</param>
+        /// <typeparam name="T">The type of the source observable.</typeparam>
+        /// <typeparam name="TResult">The type of the resulting observable.</typeparam>
         /// <returns>An <c>IObservable&lt;TResult&gt;</c></returns>
-        public static IObservable<TResult> SelectSwitch<T, TResult>(this IObservable<T> This, Func<T, int, IObservable<TResult>> selector) => This.Select(selector).Switch();
+        public static IObservable<TResult> SelectLatest<T, TResult>(this IObservable<T> This, Func<T, Task<TResult>> selector) => This.Select(selector).Switch();
 
         /// <summary>
         /// Catches any error that might occur and return an observable with a single given value.
