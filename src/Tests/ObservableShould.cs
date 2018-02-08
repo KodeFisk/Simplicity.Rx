@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
+using Microsoft.Reactive.Testing;
 using Xunit;
 
 namespace Tests
 {
     public class ObservableShould
     {
+        private TestScheduler _scheduler;
+
+        public ObservableShould()
+        {
+            _scheduler = new TestScheduler();
+        }
+        
         [Fact]
         public void ConvertNextSignalsToUnitWhenCallingToSignal()
         {
@@ -18,6 +27,37 @@ namespace Tests
                 .Wait();
             
             Assert.All(result, value => Assert.IsType<Unit>(value));
+        }
+
+        [Fact]
+        public void OnlySubscribeToMostRecentObservableWhenCallingSelectLatestAndReturningAnObservable()
+        {
+            var result = -1L; 
+                
+            Observable.Interval(TimeSpan.FromSeconds(.2), _scheduler)
+                .Take(5)
+                .SelectLatest(value => Observable.Timer(TimeSpan.FromSeconds(1), _scheduler)
+                    .Select(_ => value))
+                .Subscribe(value => result = value);
+
+            _scheduler.Start();
+            
+            Assert.Equal(4L, result);
+        }
+
+        [Fact]
+        public void OnlySubscribeToMostRecentObservableWhenCallingSelectLatestAndReturningATask()
+        {
+            var result = Observable.Interval(TimeSpan.FromSeconds(.2))
+                .Take(5)
+                .SelectLatest(async value =>
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(1));
+                    return value;
+                })
+                .Wait();
+            
+            Assert.Equal(4L, result);
         }
 
         [Fact]
