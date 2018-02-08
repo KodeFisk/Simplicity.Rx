@@ -9,7 +9,7 @@ namespace Tests
     public class ObserverShould
     {
         [Fact]
-        public void SendOneNextSignalAndThenACompletedSignalWhenUsingCompleteWith()
+        public void ReceiveOneNextSignalAndThenACompletedSignalWhenUsingCompleteWith()
         {
             const string next = "Next";
             const string error = "Error";
