@@ -6,25 +6,25 @@ using Xunit;
 
 namespace Tests
 {
-    public class ObserverTests
+    public class ObserverShould
     {
         [Fact]
-        public void CompleteWithShouldSendOneNextSignalAndThenACompletedSignal()
+        public void SendOneNextSignalAndThenACompletedSignalWhenUsingCompleteWith()
         {
             const string next = "Next";
             const string error = "Error";
             const string completed = "Completed";
 
-            var results = new List<string>();
+            var result = new List<string>();
 
             var observer = Observer.Create<Unit>(
-                value => results.Add(next),
-                ex => results.Add(error),
-                () => results.Add(completed));
+                value => result.Add(next),
+                ex => result.Add(error),
+                () => result.Add(completed));
 
             observer.CompleteWith(Unit.Default);
 
-            Assert.True(results.SequenceEqual(new[] {next, completed}));
+            Assert.Equal(new[] {next, completed}, result);
         }
     }
 }

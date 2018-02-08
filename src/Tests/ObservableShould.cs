@@ -7,56 +7,50 @@ using Xunit;
 
 namespace Tests
 {
-    public class ObservableTests
+    public class ObservableShould
     {
         [Fact]
-        public void ToSignalShouldConvertNextSignalsToUnit()
+        public void ConvertNextSignalsToUnitWhenCallingToSignal()
         {
             var result = new[] {1, 2, 3, 4}.ToObservable()
                 .ToSignal()
                 .ToList()
                 .Wait();
             
-            Assert.True(result.All(value => value.GetType() == typeof(Unit)));
+            Assert.All(result, value => Assert.IsType<Unit>(value));
         }
 
         [Fact]
-        public void CatchAndReturnShouldReturnASingleValueWhenErrorSignalIsSent()
+        public void ReturnASingleValueWhenErrorSignalIsSentWhenCallingCatchAndReturn()
         {
             var result = Observable.Return(-1)
                 .SelectMany(_ => Observable.Throw<int>(new Exception()))
                 .CatchAndReturn(0)
                 .Wait();
             
-            Assert.True(result == 0);
+            Assert.Equal(0, result);
         }
 
         [Fact]
-        public void WhereWithBoolShouldFilterOutSignalsWithOppositeValue()
+        public void FilterOutSignalsWithOppositeValueWhenCallingWhereWithBool()
         {
             var result = new[] {true, false, true, false, true, false}.ToObservable()
                 .Where(true)
                 .ToList()
                 .Wait();
             
-            Assert.True(result.All(value => value == true));
+            Assert.All(result, value => Assert.True(value));
         }
 
         [Fact]
-        public void WhereWithGenericShouldFilterOutSignalsNotEqualToSpecifiedConstant()
+        public void FilterOutSignalsNotEqualToSpecifiedConstantWhenCallingWhereWithGeneric()
         {
             var stringResult = new[] {"One", "Two", "Three", "Four"}.ToObservable()
                 .Where("One")
                 .ToList()
                 .Wait();
-
-            var intResult = new[] {1, 2, 3, 4}.ToObservable()
-                .Where(1)
-                .ToList()
-                .Wait();
             
-            Assert.True(stringResult.All(value => value == "One"));
-            Assert.True(intResult.All(value => value == 1));
+            Assert.All(stringResult, value => Assert.Equal("One", value));
         }
 
         [Fact]
@@ -67,7 +61,7 @@ namespace Tests
                 .ToList()
                 .Wait();
             
-            Assert.True(result.All(value => value != null));
+            Assert.All(result, value => Assert.NotNull(value));
         }
     }
 }
