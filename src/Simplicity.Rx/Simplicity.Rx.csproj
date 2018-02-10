@@ -10,8 +10,14 @@
     <PackageLicenseUrl>https://github.com/KodeFisk/Simplicity.Rx/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/KodeFisk/Simplicity.Rx</PackageProjectUrl>
     <PackageTags>Rx; Rx.NET; Reactive Extensions</PackageTags>
-    <Version>1.4.0</Version>
-    <PackageReleaseNotes>Added new Where overload which supports any kind of constant</PackageReleaseNotes>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>The version has been bumped to 2.0.0 as this release breaks build when upgrading from 1.4.0.
+      
+This version removes the Debug operator, which didn't work anyway.
+ToColdObservable has been removed as it doesn't work as intended.
+SelectSwitch has been renamed to SelectLatest, which is more akin to what the operator is called in other versions of Rx.
+The non-generic version of GetEvents has been renamed to GetEventSignal and now returns an IObservable&lt;Unit&gt;
+    </PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="KodeFisk.Simplicity" Version="1.0.0" />
