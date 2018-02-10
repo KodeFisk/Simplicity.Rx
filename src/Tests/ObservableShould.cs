@@ -12,10 +12,42 @@ namespace Tests
     public class ObservableShould
     {
         private readonly TestScheduler _scheduler;
+        private event EventHandler<EventArgs> TestEvent; 
 
         public ObservableShould()
         {
             _scheduler = new TestScheduler();
+        }
+
+        [Fact]
+        public void EmitNextSignalsOnEventWhenCallingGetEventSignalOnObject()
+        {
+            var result = 0;
+
+            this.GetEventSignal(nameof(TestEvent))
+                .Subscribe(_ => result++);
+            
+            TestEvent.Invoke(this, EventArgs.Empty);
+            TestEvent.Invoke(this, EventArgs.Empty);
+            TestEvent.Invoke(this, EventArgs.Empty);
+
+            Assert.Equal(3, result);
+        }
+
+        [Fact]
+        public void EmitNextSignalsOnEventWhenCallingGetEventsOnObject()
+        {
+            var results = new List<EventArgs>();
+
+            this.GetEvents<EventArgs>(nameof(TestEvent))
+                .Select(args => args.EventArgs)
+                .Subscribe(value => results.Add(value));
+            
+            TestEvent.Invoke(this, EventArgs.Empty);
+            TestEvent.Invoke(this, EventArgs.Empty);
+            TestEvent.Invoke(this, EventArgs.Empty);
+
+            Assert.Equal(new[] {EventArgs.Empty, EventArgs.Empty, EventArgs.Empty}, results);
         }
         
         [Fact]
