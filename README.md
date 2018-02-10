@@ -26,8 +26,6 @@ sourceObservable
     ...
 ```
 
-
-
 ### CatchAndReturn
 
 Intercepts the `OnError` signal and returns the specified value instead.
@@ -38,13 +36,11 @@ sourceObservable
     ...
 ```
 
-
-
 ### Where
 
 Let's you specify a constant value, instead of a predicate.
 
-```
+```C#
 sourceObservable
     .Where(true)
     ...
