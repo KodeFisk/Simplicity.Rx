@@ -11,7 +11,7 @@ namespace Tests
 {
     public class ObservableShould
     {
-        private TestScheduler _scheduler;
+        private readonly TestScheduler _scheduler;
 
         public ObservableShould()
         {
