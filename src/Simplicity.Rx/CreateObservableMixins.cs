@@ -14,7 +14,7 @@ namespace System.Reactive.Linq
         /// <param name="This">The object containing the event.</param>
         /// <param name="eventName">Name of the event.</param>
         /// <typeparam name="T">The type of the class contains the event.</typeparam>
-        public static IObservable<EventPattern<object>> GetEvents<T>(this T This, string eventName) => Observable.FromEventPattern(This, eventName);
+        public static IObservable<Unit> GetEventSignal<T>(this T This, string eventName) => Observable.FromEventPattern<EventArgs>(This, eventName).ToSignal();
 
         /// <summary>
         /// Creates an observable that signals every time the event with the given name is fired
