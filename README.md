@@ -50,8 +50,8 @@ sourceObservable
     ...
 	
 otherObservable
-	.Where("What I want")
-	...
+    .Where("What I want")
+    ...
 ```
 
 ### WhereNotNull
