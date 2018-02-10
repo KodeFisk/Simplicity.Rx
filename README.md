@@ -12,7 +12,7 @@ Converts an `IObservable<T>` to `IObservable<Unit>`.
 
 ```C#
 sourceObservable
-	.ToSignal()
+    .ToSignal()
     ...
 ```
 
@@ -22,7 +22,7 @@ Works like `SelectMany` but only subscribes to the most recent `IObservable<T>` 
 
 ```C#
 sourceObservable
-	.SelectLatest(_ => Observable.Interval(TimeSpan.FromSeconds(1)))
+    .SelectLatest(_ => Observable.Interval(TimeSpan.FromSeconds(1)))
     ...
 ```
 
@@ -34,7 +34,7 @@ Intercepts the `OnError` signal and returns the specified value instead.
 
 ```c#
 sourceObservable
-	.CatchAndReturn("Something went wrong")
+    .CatchAndReturn("Something went wrong")
     ...
 ```
 
@@ -46,8 +46,8 @@ Let's you specify a constant value, instead of a predicate.
 
 ```
 sourceObservable
-	.Where(true)
-	...
+    .Where(true)
+    ...
 	
 otherObservable
 	.Where("What I want")
@@ -60,7 +60,7 @@ Only let's non-null values through.
 
 ```C#
 sourceObservable
-	.WhereNotNull()
+    .WhereNotNull()
     ...
 ```
 
