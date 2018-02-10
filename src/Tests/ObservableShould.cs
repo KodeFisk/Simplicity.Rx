@@ -94,7 +94,7 @@ namespace Tests
         }
 
         [Fact]
-        public void WhereNotNullShouldFilterOutValuesThatAreNull()
+        public void FilterOutValuesThatAreNullWhenCallingWhereNotNull()
         {
             var result = new[] {new object(), null, new object(), null}.ToObservable()
                 .WhereNotNull()
